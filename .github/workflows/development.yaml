@@ -26,13 +26,16 @@ jobs:
         with:
           node-version: 22
       - name: "Install application minimalistically"
+        working-directory: juice-shop
         run: |
           npm install --ignore-scripts
           cd frontend
           npm install --ignore-scripts --legacy-peer-deps
       - name: "Lint source code"
+        working-directory: juice-shop
         run: npm run lint
       - name: "Lint customization configs"
+        working-directory: juice-shop
         run: >
           npm run lint:config -- -f ./config/7ms.yml &&
           npm run lint:config -- -f ./config/addo.yml &&
