@@ -2,7 +2,7 @@ name: "Terraform Bootstrap - Prod"
 
 on:
   pull_request:
-    branches: [prod]
+    branches: [main]
     paths:
       - "terraform/bootstrap/**"
       - "github/workflows/terraform-bootstrap-prod.yaml"
