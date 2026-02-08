@@ -6,7 +6,6 @@ on:
     paths:
       - "terraform/infra/**"
       - ".github/workflows/terraform-infra-dev.yaml"
-  workflow_dispatch:
 
 permissions:
   id-token: write
