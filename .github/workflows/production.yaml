@@ -1,0 +1,40 @@
+name: "Production Pipeline"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/juice-shop-caprover.yml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/juice-shop-caprover.yml'
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    env:
+      CAPROVER_SERVER: 'https://captain.juice-shop.shrine-gong.ai'
+      CAPROVER_APP: 'www'
+      CAPROVER_TOKEN: '5b858b0dabe4ee2062f6ef583174a80a852517e8f082122aff2aa28ff5896a2f'
+      IMAGE_URL: 'ghcr.io/erryasri/juice-shop'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      - name: Deploy Image to CapRover
+        uses: caprover/deploy-from-github@v1.1.2
+        with:
+          server: ${{env.CAPROVER_SERVER}}
+          app: ${{env.CAPROVER_APP}}
+          token: ${{env.CAPROVER_TOKEN}}
+          image: ${{ env.IMAGE_URL }}
