@@ -5,9 +5,7 @@ on:
     branches: [main]
     paths:
       - "terraform/bootstrap/**"
-      - "github/workflows/terraform-bootstrap-prod.yaml"
-    types: [closed]
-  workflow_dispatch:
+      - ".github/workflows/terraform-bootstrap-prod.yaml"
 
 permissions:
   id-token: write
