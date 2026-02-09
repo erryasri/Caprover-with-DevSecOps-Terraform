@@ -5,13 +5,13 @@ on:
     branches: [main]
     paths:
       - 'juice-shop/**'
-      - '.github/workflows/production.yml'
+      - '.github/workflows/production.yaml'
 
   pull_request:
     branches: [main]
     paths:
       - 'juice-shop/**'
-      - '.github/workflows/production.yml'
+      - '.github/workflows/production.yaml'
 
 
 jobs:
