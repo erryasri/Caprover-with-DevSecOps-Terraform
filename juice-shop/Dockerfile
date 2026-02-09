@@ -19,11 +19,11 @@ ARG CYCLONEDX_NPM_VERSION=latest
 RUN npm install -g @cyclonedx/cyclonedx-npm@$CYCLONEDX_NPM_VERSION
 RUN npm run sbom
 
-FROM gcr.io/distroless/nodejs22-debian12
+FROM node:22-slim
 ARG BUILD_DATE
 ARG VCS_REF
 WORKDIR /juice-shop
 COPY --from=installer --chown=65532:0 /juice-shop .
 USER 65532
 EXPOSE 3000
-CMD ["/juice-shop/build/app.js"]
+CMD ["node", "/juice-shop/build/app.js"]
