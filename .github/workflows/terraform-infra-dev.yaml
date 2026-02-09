@@ -5,8 +5,7 @@ on:
     branches: [dev]
     paths:
       - "terraform/infra/**"
-      - "./github/workflows/terraform-infra-dev.yaml"
-  workflow_dispatch:
+      - ".github/workflows/terraform-infra-dev.yaml"
 
 permissions:
   id-token: write
@@ -75,7 +74,16 @@ jobs:
         run: terraform validate -no-color
         working-directory: ${{ env.WORKING_DIR }}
 
+      - name: Force Unlock Stale State Lock
+        run: |
+          LOCK_ID=$(terraform force-unlock -force 2>&1 | grep -oP '[0-9a-f-]{36}' || true)
+          if [ -n "$LOCK_ID" ]; then
+            terraform force-unlock -force "$LOCK_ID" || true
+          fi
+        working-directory: ${{ env.WORKING_DIR }}
+        continue-on-error: true
+
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: terraform plan -no-color -lock-timeout=5m
         working-directory: ${{ env.WORKING_DIR }}
