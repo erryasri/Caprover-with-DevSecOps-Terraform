@@ -35,3 +35,5 @@ jobs:
           target: 'https://www.juice-shop.shrine-gong.ai'
           rules_file_name: 'juice-shop/.zap/rules.tsv'
           cmd_options: '-a -j'
+          allow_issue_writing: false
+          artifact_name: 'zap-scan-report'
