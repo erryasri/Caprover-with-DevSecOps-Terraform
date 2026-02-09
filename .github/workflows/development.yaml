@@ -6,7 +6,6 @@ on:
     paths:
       - "juice-shop/**"
       - ".github/workflows/development.yaml"
-  workflow_dispatch:
 
 permissions:
   contents: read
