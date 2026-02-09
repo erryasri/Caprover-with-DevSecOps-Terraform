@@ -35,3 +35,5 @@ jobs:
           target: 'ZAP_TARGET_URL_PLACEHOLDER'
           rules_file_name: 'juice-shop/.zap/rules.tsv'
           cmd_options: '-a -j'
+          allow_issue_writing: false
+          artifact_name: 'zap-scan-report'
