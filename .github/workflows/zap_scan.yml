@@ -2,17 +2,14 @@ name: "ZAP Baseline Scan"
 
 on:
   push:
-    branches:
-      - stage
+    branches: [main]
     paths:
-      - "juice-shop/**"
-      - ".github/workflows/zap_scan.yml"
+      - '.github/workflows/zap_scan.yml'
+
   pull_request:
-    branches:
-      - stage
+    branches: [main]
     paths:
-      - "juice-shop/**"
-      - ".github/workflows/zap_scan.yml"
+      - '.github/workflows/zap_scan.yml'
   # schedule:
   #   - cron:  '0 18 * * 6'
 
