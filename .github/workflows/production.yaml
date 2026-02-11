@@ -13,15 +13,14 @@ on:
       - 'juice-shop/**'
       - '.github/workflows/production.yaml'
 
-
 jobs:
   Deploy:
     runs-on: ubuntu-latest
     env:
-      CAPROVER_SERVER: 'CAPROVER_SERVER_URL_PLACEHOLDER'
-      CAPROVER_APP: 'www'
-      CAPROVER_TOKEN: '5b858b0dabe4ee2062f6ef583174a80a852517e8f082122aff2aa28ff5896a2f'
-      IMAGE_URL: 'ghcr.io/erryasri/juice-shop'
+      CAPROVER_SERVER: ${{ secrets.CAPROVER_SERVER }}
+      CAPROVER_APP: ${{ secrets.CAPROVER_APP }}
+      CAPROVER_TOKEN: ${{ secrets.CAPROVER_TOKEN }}
+      IMAGE_URL: ghcr.io/${{ github.repository_owner }}/juice-shop:latest
 
     steps:
       - name: Check out repository
@@ -32,7 +31,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy Image to CapRover
         uses: caprover/deploy-from-github@v1.1.2
